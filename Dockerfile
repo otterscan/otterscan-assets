@@ -6,16 +6,16 @@ COPY trustwallet/blockchains/polygon/assets /assets/137/
 COPY trustwallet/blockchains/smartchain/assets /assets/56/
 RUN find . -name logo.png | parallel magick convert {} -filter Lanczos -resize 32x32 {}; exit 0
 
-FROM alpine:3.15.0 AS fourbytesbuilder
+FROM scratch AS fourbytesbuilder
 WORKDIR /signatures
 COPY 4bytes/signatures /signatures/
 COPY 4bytes/with_parameter_names /signatures/
 
-FROM alpine:3.15.0 AS topic0builder
+FROM scratch AS topic0builder
 WORKDIR /topic0
 COPY topic0/with_parameter_names /topic0/
 
-FROM alpine:3.15.0 AS chainsbuilder
+FROM scratch AS chainsbuilder
 WORKDIR /chains
 COPY chains/_data/chains /chains/
 
