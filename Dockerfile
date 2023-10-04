@@ -82,10 +82,10 @@ RUN set -ex \
        done \
     && rm -rf /tmp/packages
 RUN apk update && apk add jq
-COPY --from=chainsbuilder /chains /usr/share/nginx/html/chains/
-COPY --from=topic0builder /topic0 /usr/share/nginx/html/topic0/
-COPY --from=fourbytesbuilder /signatures /usr/share/nginx/html/signatures/
-COPY --from=logobuilder /assets /usr/share/nginx/html/assets/
+COPY --link --from=chainsbuilder /chains /usr/share/nginx/html/chains/
+COPY --link --from=topic0builder /topic0 /usr/share/nginx/html/topic0/
+COPY --link --from=fourbytesbuilder /signatures /usr/share/nginx/html/signatures/
+COPY --link --from=logobuilder /assets /usr/share/nginx/html/assets/
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 WORKDIR /
